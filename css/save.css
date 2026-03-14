@@ -1,0 +1,88 @@
+#screen-save {
+  background: var(--black);
+}
+.save-panel {
+  width: min(600px, 90vw);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.save-title {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  letter-spacing: 1em;
+  text-align: center;
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+.save-slots {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.save-slot {
+  padding: 1rem 1.5rem;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-left: 3px solid transparent;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  transition: all 0.2s var(--ease-out);
+}
+.save-slot:hover,
+.save-slot.highlighted {
+  border-left-color: var(--heat);
+  background: rgba(255,107,53,0.04);
+}
+.slot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.4rem;
+}
+.slot-number {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--heat);
+  letter-spacing: 0.2em;
+}
+.slot-date {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--grey);
+}
+.slot-info {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 0.3rem;
+}
+.slot-chapter {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  color: var(--white);
+  letter-spacing: 0.3em;
+}
+.slot-day {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--grey-light);
+}
+.slot-empty {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  color: var(--grey-dark);
+  letter-spacing: 0.5em;
+}
+.slot-stats {
+  display: flex;
+  gap: 1.5rem;
+}
+.slot-stat {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--grey);
+}
+.save-back {
+  margin-top: 1.5rem;
+  justify-content: center;
+}
