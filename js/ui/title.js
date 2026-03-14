@@ -8,10 +8,8 @@ const TitleScreen = {
     this.menuItems = [...document.querySelectorAll('#screen-title .menu-item')];
     this.active = true;
     this.currentIndex = 0;
-
-    const cont = document.querySelector('[data-action="continue"]');
+    const cont = document.querySelector('#screen-title [data-action="continue"]');
     if (cont) cont.classList.toggle('disabled', !GameState.hasSave());
-
     this.updateMenu();
     this.bindEvents();
   },
@@ -27,15 +25,11 @@ const TitleScreen = {
     this.menuItems.forEach((item, i) => {
       item.addEventListener('mouseenter', () => {
         if (!this.active || item.classList.contains('disabled')) return;
-        this.currentIndex = i;
-        this.updateMenu();
-        audio.playSelect();
+        this.currentIndex = i; this.updateMenu(); audio.playSelect();
       });
       item.addEventListener('click', () => {
         if (!this.active || item.classList.contains('disabled')) return;
-        this.currentIndex = i;
-        this.updateMenu();
-        this.confirm();
+        this.currentIndex = i; this.updateMenu(); this.confirm();
       });
     });
   },
@@ -48,9 +42,7 @@ const TitleScreen = {
       if (next >= this.menuItems.length) next = 0;
       if (!this.menuItems[next].classList.contains('disabled')) break;
     }
-    this.currentIndex = next;
-    this.updateMenu();
-    audio.playSelect();
+    this.currentIndex = next; this.updateMenu(); audio.playSelect();
   },
 
   updateMenu() {
@@ -60,44 +52,36 @@ const TitleScreen = {
   async confirm() {
     const action = this.menuItems[this.currentIndex].dataset.action;
     audio.playConfirm();
-    this.active = false;
-    this.destroy();
-
+    this.active = false; this.destroy();
     switch (action) {
-      case 'start':
-        Engine.startNewGame();
-        break;
+      case 'start': Engine.startNewGame(); break;
       case 'continue':
-        GameState.load();
-        Engine.startNewGame();
+        GameState.load(0);
+        if (GameState.story.chapter >= 1) {
+          Engine.currentChapterScript = SCRIPT_CHAPTER1;
+          Transitions.switchScreen('title', 'explore', 'fade', 500).then(() => ExploreSystem.enter(Engine.currentChapterScript));
+        } else {
+          Engine.startNewGame();
+        }
         break;
-      case 'config':
-        Engine.showConfig();
-        break;
+      case 'archive': Engine.showArchive(); break;
+      case 'config': Engine.showConfig(); break;
     }
   },
 
   destroy() {
     this.active = false;
-    if (this._keyHandler) {
-      document.removeEventListener('keydown', this._keyHandler);
-      this._keyHandler = null;
-    }
+    if (this._keyHandler) { document.removeEventListener('keydown', this._keyHandler); this._keyHandler = null; }
   }
 };
 
 const ConfigScreen = {
   _keyHandler: null,
-
   init() {
     const $ = id => document.getElementById(id);
-
-    const tsSlider = $('cfg-text-speed');
-    const tsVal = $('cfg-text-speed-val');
-    const volSlider = $('cfg-volume');
-    const volVal = $('cfg-volume-val');
-    const scanBtn = $('cfg-scanlines');
-    const noiseBtn = $('cfg-noise');
+    const tsSlider = $('cfg-text-speed'), tsVal = $('cfg-text-speed-val');
+    const volSlider = $('cfg-volume'), volVal = $('cfg-volume-val');
+    const scanBtn = $('cfg-scanlines'), noiseBtn = $('cfg-noise');
     const backBtn = document.querySelector('#screen-config .config-back');
 
     tsSlider.value = GameState.config.textSpeed;
@@ -109,46 +93,13 @@ const ConfigScreen = {
     noiseBtn.textContent = GameState.config.noise ? 'ON' : 'OFF';
     noiseBtn.classList.toggle('active', GameState.config.noise);
 
-    tsSlider.oninput = () => {
-      GameState.config.textSpeed = parseInt(tsSlider.value);
-      tsVal.textContent = tsSlider.value + 'ms';
-    };
-    volSlider.oninput = () => {
-      GameState.config.volume = parseInt(volSlider.value) / 100;
-      volVal.textContent = volSlider.value + '%';
-      audio.setVolume(GameState.config.volume);
-    };
-    scanBtn.onclick = () => {
-      GameState.config.scanlines = !GameState.config.scanlines;
-      scanBtn.textContent = GameState.config.scanlines ? 'ON' : 'OFF';
-      scanBtn.classList.toggle('active', GameState.config.scanlines);
-      document.getElementById('scanlines').classList.toggle('off', !GameState.config.scanlines);
-      audio.playSelect();
-    };
-    noiseBtn.onclick = () => {
-      GameState.config.noise = !GameState.config.noise;
-      noiseBtn.textContent = GameState.config.noise ? 'ON' : 'OFF';
-      noiseBtn.classList.toggle('active', GameState.config.noise);
-      document.getElementById('noise').classList.toggle('off', !GameState.config.noise);
-      audio.playSelect();
-    };
-    backBtn.onclick = () => {
-      audio.playConfirm();
-      Engine.backToTitle();
-    };
-    this._keyHandler = (e) => {
-      if (e.code === 'Escape') {
-        audio.playConfirm();
-        Engine.backToTitle();
-      }
-    };
+    tsSlider.oninput = () => { GameState.config.textSpeed = parseInt(tsSlider.value); tsVal.textContent = tsSlider.value + 'ms'; };
+    volSlider.oninput = () => { GameState.config.volume = parseInt(volSlider.value) / 100; volVal.textContent = volSlider.value + '%'; audio.setVolume(GameState.config.volume); };
+    scanBtn.onclick = () => { GameState.config.scanlines = !GameState.config.scanlines; scanBtn.textContent = GameState.config.scanlines ? 'ON' : 'OFF'; scanBtn.classList.toggle('active', GameState.config.scanlines); document.getElementById('scanlines').classList.toggle('off', !GameState.config.scanlines); audio.playSelect(); };
+    noiseBtn.onclick = () => { GameState.config.noise = !GameState.config.noise; noiseBtn.textContent = GameState.config.noise ? 'ON' : 'OFF'; noiseBtn.classList.toggle('active', GameState.config.noise); document.getElementById('noise').classList.toggle('off', !GameState.config.noise); audio.playSelect(); };
+    backBtn.onclick = () => { audio.playConfirm(); this.destroy(); Engine.returnFromOverlay(); };
+    this._keyHandler = (e) => { if (e.code === 'Escape') { audio.playConfirm(); this.destroy(); Engine.returnFromOverlay(); } };
     document.addEventListener('keydown', this._keyHandler);
   },
-
-  destroy() {
-    if (this._keyHandler) {
-      document.removeEventListener('keydown', this._keyHandler);
-      this._keyHandler = null;
-    }
-  }
+  destroy() { if (this._keyHandler) { document.removeEventListener('keydown', this._keyHandler); this._keyHandler = null; } }
 };
