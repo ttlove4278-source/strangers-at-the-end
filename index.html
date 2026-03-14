@@ -4,12 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>世紀末異鄉人</title>
-
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;700&family=Zen+Kurenaido&family=Shippori+Mincho:wght@400;700;800&display=swap" rel="stylesheet">
-
-  <!-- CSS -->
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/effects.css">
@@ -21,37 +17,37 @@
   <link rel="stylesheet" href="css/battle.css">
 </head>
 <body>
-  <!-- ============ 全局特效层 ============ -->
+
+  <!-- 全局特效层 -->
   <div id="scanlines" class="scanlines"></div>
   <div id="vignette" class="vignette"></div>
   <div id="noise" class="noise"></div>
   <div id="transition-overlay" class="transition-overlay"></div>
 
-  <!-- ============ BOOT 序列 ============ -->
+  <!-- BOOT -->
   <section id="screen-boot" class="screen active">
     <div class="boot-content">
-      <div class="boot-line" data-delay="0">BIOS v1.999</div>
-      <div class="boot-line" data-delay="400">MEM CHECK... 1999KB OK</div>
-      <div class="boot-line" data-delay="900">LOGOS DENSITY: 0.3 HERACLITUS</div>
-      <div class="boot-line" data-delay="1500">PHILOSOPHY_SYS... <span class="warn">WARNING: CRITICAL MASS</span></div>
-      <div class="boot-line" data-delay="2200">DATE: 1999.07.13</div>
-      <div class="boot-line" data-delay="2800">LOADING WORLD...</div>
-      <div class="boot-cursor" data-delay="3200">█</div>
+      <div class="boot-line">BIOS v1.999</div>
+      <div class="boot-line">MEM CHECK... 1999KB OK</div>
+      <div class="boot-line">LOGOS DENSITY: 0.3 HERACLITUS</div>
+      <div class="boot-line">PHILOSOPHY_SYS... <span class="warn">WARNING: CRITICAL MASS</span></div>
+      <div class="boot-line">DATE: 1999.07.13</div>
+      <div class="boot-line">LOADING WORLD...</div>
+      <div class="boot-cursor">█</div>
+      <div class="boot-hint breathe">CLICK OR PRESS ANY KEY</div>
     </div>
   </section>
 
-  <!-- ============ OP 动画 ============ -->
+  <!-- OP -->
   <section id="screen-opening" class="screen">
-    <div class="op-container">
-      <!-- OP各阶段由JS动态生成 -->
-    </div>
+    <div class="op-container"></div>
     <div class="op-skip">
       <span class="op-skip-key">SPACE</span>
       <span class="op-skip-text">跳过</span>
     </div>
   </section>
 
-  <!-- ============ 标题画面 ============ -->
+  <!-- 标题 -->
   <section id="screen-title" class="screen">
     <div class="title-bg">
       <div class="heat-haze"></div>
@@ -60,13 +56,13 @@
     <div class="title-content">
       <div class="title-sub-top">1999·夏</div>
       <h1 class="title-main">
-        <span class="title-char" data-index="0">世</span>
-        <span class="title-char" data-index="1">紀</span>
-        <span class="title-char" data-index="2">末</span>
+        <span class="title-char" style="--i:0">世</span>
+        <span class="title-char" style="--i:1">紀</span>
+        <span class="title-char" style="--i:2">末</span>
         <span class="title-break"></span>
-        <span class="title-char" data-index="3">異</span>
-        <span class="title-char" data-index="4">鄉</span>
-        <span class="title-char" data-index="5">人</span>
+        <span class="title-char" style="--i:3">異</span>
+        <span class="title-char" style="--i:4">鄉</span>
+        <span class="title-char" style="--i:5">人</span>
       </h1>
       <div class="title-sub-bottom">推石頭的人們</div>
       <div class="title-en">STRANGERS AT THE END OF THE CENTURY</div>
@@ -91,34 +87,59 @@
     </div>
   </section>
 
-  <!-- ============ 卷首诗 ============ -->
+  <!-- 设定画面 -->
+  <section id="screen-config" class="screen">
+    <div class="config-panel">
+      <div class="config-title">設 定</div>
+      <div class="config-group">
+        <label class="config-label">文字速度</label>
+        <div class="config-slider-wrap">
+          <input type="range" id="cfg-text-speed" class="config-slider" min="10" max="80" value="30">
+          <span class="config-val" id="cfg-text-speed-val">30ms</span>
+        </div>
+      </div>
+      <div class="config-group">
+        <label class="config-label">音量</label>
+        <div class="config-slider-wrap">
+          <input type="range" id="cfg-volume" class="config-slider" min="0" max="100" value="30">
+          <span class="config-val" id="cfg-volume-val">30%</span>
+        </div>
+      </div>
+      <div class="config-group">
+        <label class="config-label">扫描线</label>
+        <button class="config-toggle active" id="cfg-scanlines">ON</button>
+      </div>
+      <div class="config-group">
+        <label class="config-label">噪点</label>
+        <button class="config-toggle active" id="cfg-noise">ON</button>
+      </div>
+      <div class="config-back menu-item" data-action="back">
+        <span class="menu-marker">▸</span>
+        <span class="menu-text">返回</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 卷首诗 -->
   <section id="screen-poem" class="screen">
     <div class="poem-container">
-      <div class="poem-lines">
-        <!-- JS动态生成竖排诗句 -->
-      </div>
+      <div class="poem-lines"></div>
       <div class="poem-author"></div>
     </div>
   </section>
 
-  <!-- ============ 对话/剧情 ============ -->
+  <!-- 对话/剧情 -->
   <section id="screen-dialogue" class="screen">
     <div class="dlg-background" id="dlg-bg">
       <div class="dlg-bg-overlay"></div>
     </div>
-
-    <!-- 角色立绘区 -->
     <div class="dlg-characters">
       <div class="dlg-chara left" id="dlg-chara-left"></div>
       <div class="dlg-chara right" id="dlg-chara-right"></div>
     </div>
-
-    <!-- 旁白层 -->
     <div class="dlg-narration" id="dlg-narration">
       <div class="narration-text" id="narration-text"></div>
     </div>
-
-    <!-- 对话框 -->
     <div class="dlg-box" id="dlg-box">
       <div class="dlg-name-plate" id="dlg-name">
         <span class="dlg-name-text"></span>
@@ -128,20 +149,14 @@
         <div class="dlg-indicator" id="dlg-indicator">▼</div>
       </div>
     </div>
-
-    <!-- 选项 -->
-    <div class="dlg-choices" id="dlg-choices">
-      <!-- JS动态生成 -->
-    </div>
-
-    <!-- 场景信息 -->
+    <div class="dlg-choices" id="dlg-choices"></div>
     <div class="dlg-location" id="dlg-location">
       <div class="loc-time"></div>
       <div class="loc-place"></div>
     </div>
   </section>
 
-  <!-- ============ 探索界面 ============ -->
+  <!-- 探索 -->
   <section id="screen-explore" class="screen">
     <div class="explore-bg" id="explore-bg"></div>
     <div class="explore-ui">
@@ -153,28 +168,19 @@
         </div>
         <div class="explore-location" id="explore-location">堤防</div>
       </div>
-
       <div class="explore-status">
         <div class="status-bar">
           <span class="status-label">LG</span>
-          <div class="status-gauge">
-            <div class="status-fill logos-fill" id="logos-bar" style="width:62%"></div>
-          </div>
+          <div class="status-gauge"><div class="status-fill logos-fill" id="logos-bar" style="width:62%"></div></div>
           <span class="status-value" id="logos-value">6.2赫</span>
         </div>
         <div class="status-bar">
           <span class="status-label">結晶</span>
-          <div class="status-gauge crystal-gauge">
-            <div class="status-fill crystal-fill" id="crystal-bar" style="width:12%"></div>
-          </div>
+          <div class="status-gauge crystal-gauge"><div class="status-fill crystal-fill" id="crystal-bar" style="width:12%"></div></div>
           <span class="status-value" id="crystal-value">12%</span>
         </div>
       </div>
-
-      <div class="explore-actions" id="explore-actions">
-        <!-- JS生成 -->
-      </div>
-
+      <div class="explore-actions" id="explore-actions"></div>
       <div class="explore-nav">
         <button class="nav-btn" id="nav-prev">◁</button>
         <div class="nav-channels" id="nav-channels"></div>
@@ -183,39 +189,50 @@
     </div>
   </section>
 
-  <!-- ============ 战斗界面(预置) ============ -->
+  <!-- 战斗 -->
   <section id="screen-battle" class="screen">
-    <div class="battle-stage" id="battle-stage"></div>
+    <div class="battle-stage" id="battle-stage">
+      <div class="battle-env" id="battle-env"></div>
+      <div class="battle-enemy-visual" id="battle-enemy-visual"></div>
+      <div class="battle-player-visual" id="battle-player-visual"></div>
+      <div class="battle-fx" id="battle-fx"></div>
+    </div>
     <div class="battle-ui">
       <div class="battle-enemy-info" id="battle-enemy-info"></div>
-      <div class="battle-player-info" id="battle-player-info"></div>
+      <div class="battle-player-status" id="battle-player-status"></div>
       <div class="battle-menu" id="battle-menu">
         <div class="bmenu-item" data-action="quote">
           <span class="bmenu-key">引用</span>
           <span class="bmenu-sub">Quote</span>
+          <span class="bmenu-cost"><1赫</span>
         </div>
         <div class="bmenu-item" data-action="proposition">
           <span class="bmenu-key">命題展開</span>
           <span class="bmenu-sub">Proposition</span>
+          <span class="bmenu-cost">3赫</span>
         </div>
         <div class="bmenu-item" data-action="dialectic">
           <span class="bmenu-key">辯證</span>
           <span class="bmenu-sub">Dialectic</span>
+          <span class="bmenu-cost">？</span>
         </div>
         <div class="bmenu-item" data-action="item">
           <span class="bmenu-key">道具</span>
           <span class="bmenu-sub">Items</span>
+          <span class="bmenu-cost"></span>
         </div>
         <div class="bmenu-item" data-action="silence">
           <span class="bmenu-key">沈默</span>
           <span class="bmenu-sub">Silence</span>
+          <span class="bmenu-cost">+1赫</span>
         </div>
       </div>
       <div class="battle-log" id="battle-log"></div>
+      <div class="battle-declaration" id="battle-declaration"></div>
     </div>
   </section>
 
-  <!-- ============ JS ============ -->
+  <!-- JS -->
   <script src="js/data/characters.js"></script>
   <script src="js/data/script-prologue.js"></script>
   <script src="js/core/audio.js"></script>
@@ -225,6 +242,7 @@
   <script src="js/ui/title.js"></script>
   <script src="js/ui/poem.js"></script>
   <script src="js/ui/dialogue.js"></script>
+  <script src="js/ui/battle-ui.js"></script>
   <script src="js/core/engine.js"></script>
 </body>
 </html>
