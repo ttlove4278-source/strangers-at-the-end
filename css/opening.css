@@ -1,11 +1,9 @@
-/* ===== BOOT 画面 ===== */
 #screen-boot {
   background: var(--black);
   align-items: flex-start;
   justify-content: flex-start;
   padding: 8vh 6vw;
 }
-
 .boot-content {
   font-family: var(--font-mono);
   font-size: 0.9rem;
@@ -13,42 +11,43 @@
   line-height: 2.2;
   text-shadow: 0 0 8px rgba(51, 255, 102, 0.5);
 }
-
 .boot-line {
   opacity: 0;
   transform: translateX(-10px);
   transition: all 0.3s var(--ease-out);
 }
-
 .boot-line.visible {
   opacity: 1;
   transform: translateX(0);
 }
-
 .boot-cursor {
   opacity: 0;
   color: var(--crt-green);
   font-size: 1.1rem;
 }
-
 .boot-cursor.visible {
   animation: cursorBlink 0.6s step-end infinite;
   opacity: 1;
 }
+.boot-hint {
+  margin-top: 4vh;
+  font-size: 0.75rem;
+  color: var(--grey-dark);
+  letter-spacing: 0.3em;
+}
 
-/* ===== OP 动画 ===== */
 #screen-opening {
   background: var(--black);
   overflow: hidden;
 }
-
 .op-container {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
-/* OP - 日期闪入 */
 .op-date {
   position: absolute;
   top: 50%; left: 50%;
@@ -58,72 +57,62 @@
   color: var(--white);
   letter-spacing: 0.5em;
   opacity: 0;
-  text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+  text-shadow: 0 0 30px rgba(255,255,255,0.3);
 }
-
 .op-date.animate {
   animation: opDateIn 2s var(--ease-slow) forwards;
 }
-
 @keyframes opDateIn {
   0% { opacity: 0; letter-spacing: 2em; filter: blur(10px); }
   40% { opacity: 1; letter-spacing: 0.5em; filter: blur(0); }
   80% { opacity: 1; }
   100% { opacity: 0; }
 }
-
-/* OP - 哲学引语 */
 .op-quote {
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  opacity: 0;
-  max-width: 70vw;
+  opacity: 1;
+  max-width: 80vw;
 }
-
 .op-quote-text {
   font-family: var(--font-serif);
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   color: var(--white);
   line-height: 2.4;
   letter-spacing: 0.15em;
   writing-mode: vertical-rl;
   text-orientation: mixed;
-  height: 60vh;
+  height: 55vh;
   display: flex;
   flex-direction: row-reverse;
   gap: 2.5rem;
+  justify-content: center;
 }
-
 .op-quote-text .vline {
   opacity: 0;
   transform: translateY(-20px);
 }
-
 .op-quote-text .vline.animate {
   animation: opLineIn 1.2s var(--ease-slow) forwards;
 }
-
 @keyframes opLineIn {
   0% { opacity: 0; transform: translateY(-30px); filter: blur(3px); }
   100% { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
-
 .op-quote-attr {
   font-family: var(--font-handwrite);
   font-size: 1rem;
   color: var(--heat);
-  margin-top: 3rem;
+  margin-top: 2rem;
   opacity: 0;
   letter-spacing: 0.3em;
+  writing-mode: horizontal-tb;
 }
-
 .op-quote-attr.animate {
   animation: fadeIn 1.5s var(--ease-slow) forwards;
 }
-
-/* OP - 角色剪影 */
 .op-silhouette {
   position: absolute;
   top: 0; left: 0;
@@ -133,57 +122,49 @@
   justify-content: center;
   opacity: 0;
 }
-
 .op-silhouette.animate {
   animation: silhouetteFlash 0.8s var(--ease-out) forwards;
 }
-
 @keyframes silhouetteFlash {
   0% { opacity: 0; transform: scale(1.1); }
   15% { opacity: 1; }
   85% { opacity: 1; }
   100% { opacity: 0; transform: scale(1); }
 }
-
 .op-sil-name {
   font-family: var(--font-serif);
-  font-size: 3.5rem;
+  font-size: clamp(2.5rem, 6vw, 3.5rem);
   font-weight: 900;
   letter-spacing: 0.3em;
   position: relative;
 }
-
 .op-sil-name::after {
   content: attr(data-sub);
   position: absolute;
-  bottom: -2rem;
+  bottom: -2.5rem;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: 400;
   font-family: var(--font-mono);
-  letter-spacing: 0.5em;
+  letter-spacing: 0.4em;
   opacity: 0.5;
+  white-space: nowrap;
 }
-
 .op-sil-stripe {
   position: absolute;
   top: 0; left: 0;
   height: 100%;
-  width: 8px;
+  width: 6px;
   transform: scaleY(0);
 }
-
 .op-sil-stripe.animate {
   animation: stripeIn 0.6s var(--ease-dramatic) forwards;
 }
-
 @keyframes stripeIn {
   0% { transform: scaleY(0); }
   100% { transform: scaleY(1); }
 }
-
-/* OP - 标题显现 */
 .op-title-reveal {
   position: absolute;
   top: 50%; left: 50%;
@@ -191,44 +172,24 @@
   text-align: center;
   opacity: 0;
 }
-
 .op-title-reveal.animate {
   animation: titleCrack 2s var(--ease-slow) forwards;
 }
-
 @keyframes titleCrack {
-  0% {
-    opacity: 0;
-    letter-spacing: 0;
-    filter: blur(20px);
-    transform: translate(-50%, -50%) scale(0.5);
-  }
-  30% {
-    opacity: 1;
-    filter: blur(0);
-    transform: translate(-50%, -50%) scale(1.05);
-  }
-  50% {
-    transform: translate(-50%, -50%) scale(1);
-  }
-  100% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-  }
+  0% { opacity: 0; filter: blur(20px); transform: translate(-50%, -50%) scale(0.5); }
+  30% { opacity: 1; filter: blur(0); transform: translate(-50%, -50%) scale(1.05); }
+  50% { transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 }
-
 .op-title-main {
   font-family: var(--font-display);
-  font-size: 5rem;
+  font-size: clamp(3rem, 7vw, 5rem);
   font-weight: 900;
   letter-spacing: 0.4em;
   color: var(--white);
-  text-shadow: 
-    0 0 40px var(--heat-glow),
-    0 0 80px var(--heat-glow);
+  text-shadow: 0 0 40px var(--heat-glow), 0 0 80px var(--heat-glow);
   white-space: nowrap;
 }
-
 .op-title-sub {
   font-family: var(--font-serif);
   font-size: 1.1rem;
@@ -237,28 +198,21 @@
   margin-top: 1.5rem;
   opacity: 0;
 }
-
 .op-title-sub.animate {
   animation: fadeIn 2s var(--ease-slow) 0.5s forwards;
 }
-
-/* OP - 跳过按钮 */
 .op-skip {
   position: absolute;
-  bottom: 3vh;
-  right: 4vw;
+  bottom: 3vh; right: 4vw;
   display: flex;
   align-items: center;
   gap: 0.6rem;
   opacity: 0.3;
   transition: opacity 0.3s;
   z-index: var(--z-ui);
+  cursor: pointer;
 }
-
-.op-skip:hover {
-  opacity: 0.8;
-}
-
+.op-skip:hover { opacity: 0.8; }
 .op-skip-key {
   font-family: var(--font-mono);
   font-size: 0.7rem;
@@ -267,7 +221,6 @@
   border-radius: 3px;
   color: var(--grey-light);
 }
-
 .op-skip-text {
   font-family: var(--font-sans);
   font-size: 0.75rem;
