@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="css/pause.css">
   <link rel="stylesheet" href="css/archive.css">
   <link rel="stylesheet" href="css/mobile.css">
+  <link rel="stylesheet" href="css/dlc-miyuki.css">
 </head>
 <body>
 
@@ -27,7 +28,6 @@
   <div id="noise" class="noise"></div>
   <div id="transition-overlay" class="transition-overlay"></div>
 
-  <!-- 移动端虚拟按键 -->
   <div id="mobile-controls" class="mobile-controls">
     <button class="mobile-btn mobile-btn-up" data-key="ArrowUp">▲</button>
     <button class="mobile-btn mobile-btn-down" data-key="ArrowDown">▼</button>
@@ -56,26 +56,71 @@
     <div class="op-skip"><span class="op-skip-key">SPACE</span><span class="op-skip-text">跳过</span></div>
   </section>
 
-  <!-- 标题 -->
+  <!-- === 标题·翻转容器 === -->
   <section id="screen-title" class="screen">
-    <div class="title-bg"><div class="heat-haze"></div><div class="title-silhouette"></div></div>
-    <div class="title-content">
-      <div class="title-sub-top">1999·夏</div>
-      <h1 class="title-main">
-        <span class="title-char" style="--i:0">世</span><span class="title-char" style="--i:1">紀</span><span class="title-char" style="--i:2">末</span>
-        <span class="title-break"></span>
-        <span class="title-char" style="--i:3">異</span><span class="title-char" style="--i:4">鄉</span><span class="title-char" style="--i:5">人</span>
-      </h1>
-      <div class="title-sub-bottom">推石頭的人們</div>
-      <div class="title-en">STRANGERS AT THE END OF THE CENTURY</div>
+    <div class="title-flipper" id="title-flipper">
+
+      <!-- 正面：本篇 -->
+      <div class="title-face title-front">
+        <div class="title-bg"><div class="heat-haze"></div><div class="title-silhouette"></div></div>
+        <div class="title-content">
+          <div class="title-sub-top">1999·夏</div>
+          <h1 class="title-main">
+            <span class="title-char" style="--i:0">世</span><span class="title-char" style="--i:1">紀</span><span class="title-char" style="--i:2">末</span>
+            <span class="title-break"></span>
+            <span class="title-char" style="--i:3">異</span><span class="title-char" style="--i:4">鄉</span><span class="title-char" style="--i:5">人</span>
+          </h1>
+          <div class="title-sub-bottom">推石頭的人們</div>
+          <div class="title-en">STRANGERS AT THE END OF THE CENTURY</div>
+        </div>
+        <nav class="title-menu" id="title-menu-main">
+          <div class="menu-item active" data-action="start"><span class="menu-marker">▸</span><span class="menu-text">開始推石頭</span></div>
+          <div class="menu-item" data-action="continue"><span class="menu-marker">▸</span><span class="menu-text">繼續</span></div>
+          <div class="menu-item" data-action="archive"><span class="menu-marker">▸</span><span class="menu-text">九課檔案</span></div>
+          <div class="menu-item" data-action="config"><span class="menu-marker">▸</span><span class="menu-text">設定</span></div>
+        </nav>
+        <div class="title-footer"><span>© 1999 第九課非公式記録</span><span class="title-temp">37.5℃</span></div>
+        <!-- 翻转按钮 -->
+        <button class="title-flip-btn" id="flip-to-back" title="1994·夏">
+          <span class="flip-icon">❄</span>
+          <span class="flip-label">1994</span>
+        </button>
+      </div>
+
+      <!-- 背面：深雪DLC -->
+      <div class="title-face title-back">
+        <div class="title-bg-dlc">
+          <div class="dlc-particles" id="dlc-particles"></div>
+          <div class="dlc-light"></div>
+        </div>
+        <div class="title-content">
+          <div class="title-sub-top dlc-sub-top">1994·夏</div>
+          <h1 class="title-main dlc-title-main">
+            <span class="title-char dlc-char" style="--i:0">夏</span>
+            <span class="title-char dlc-char" style="--i:1">天</span>
+            <span class="title-char dlc-char" style="--i:2">結</span>
+            <span class="title-char dlc-char" style="--i:3">束</span>
+            <span class="title-break"></span>
+            <span class="title-char dlc-char" style="--i:4">之</span>
+            <span class="title-char dlc-char" style="--i:5">前</span>
+          </h1>
+          <div class="title-sub-bottom dlc-sub-bottom">給哥哥的信</div>
+          <div class="title-en dlc-en">BEFORE SUMMER ENDS — Letters to My Brother</div>
+        </div>
+        <nav class="title-menu" id="title-menu-dlc">
+          <div class="menu-item dlc-menu-item active" data-action="dlc-start"><span class="menu-marker">▸</span><span class="menu-text">打開信箱</span></div>
+          <div class="menu-item dlc-menu-item" data-action="dlc-continue"><span class="menu-marker">▸</span><span class="menu-text">繼續讀信</span></div>
+        </nav>
+        <div class="title-footer dlc-footer">
+          <span>夏目深雪 — 1983.3.12 - 1994.8.5</span>
+          <span class="dlc-temp">36.2℃</span>
+        </div>
+        <button class="title-flip-btn flip-btn-back" id="flip-to-front" title="回到1999">
+          <span class="flip-icon">☀</span>
+          <span class="flip-label">1999</span>
+        </button>
+      </div>
     </div>
-    <nav class="title-menu">
-      <div class="menu-item active" data-action="start"><span class="menu-marker">▸</span><span class="menu-text">開始推石頭</span></div>
-      <div class="menu-item" data-action="continue"><span class="menu-marker">▸</span><span class="menu-text">繼續</span></div>
-      <div class="menu-item" data-action="archive"><span class="menu-marker">▸</span><span class="menu-text">九課檔案</span></div>
-      <div class="menu-item" data-action="config"><span class="menu-marker">▸</span><span class="menu-text">設定</span></div>
-    </nav>
-    <div class="title-footer"><span>© 1999 第九課非公式記録</span><span class="title-temp">37.5℃</span></div>
   </section>
 
   <!-- 设定 -->
@@ -106,6 +151,21 @@
     </div>
     <div class="dlg-choices" id="dlg-choices"></div>
     <div class="dlg-location" id="dlg-location"><div class="loc-time"></div><div class="loc-place"></div></div>
+    <!-- DLC: 写信UI -->
+    <div class="dlc-letter-ui" id="dlc-letter-ui">
+      <div class="letter-paper">
+        <div class="letter-date" id="letter-date"></div>
+        <div class="letter-body" id="letter-body"></div>
+        <div class="letter-sign">深雪</div>
+      </div>
+      <div class="letter-prompt" id="letter-prompt"></div>
+    </div>
+    <!-- DLC: 剩余日数 -->
+    <div class="dlc-days-left" id="dlc-days-left">
+      <span class="days-label">剩餘</span>
+      <span class="days-number" id="days-number">155</span>
+      <span class="days-unit">日</span>
+    </div>
   </section>
 
   <!-- 探索 -->
@@ -163,7 +223,7 @@
     </div>
   </section>
 
-  <!-- 暂停菜单 -->
+  <!-- 暂停 -->
   <div id="pause-overlay" class="pause-overlay">
     <div class="pause-panel">
       <div class="pause-title">中 斷</div>
@@ -187,10 +247,7 @@
   <!-- 档案 -->
   <section id="screen-archive" class="screen">
     <div class="archive-panel">
-      <div class="archive-header">
-        <div class="archive-title">厚生省第九課·檔案室</div>
-        <div class="archive-subtitle">CLASSIFIED — K-1999</div>
-      </div>
+      <div class="archive-header"><div class="archive-title">厚生省第九課·檔案室</div><div class="archive-subtitle">CLASSIFIED — K-1999</div></div>
       <div class="archive-tabs">
         <button class="archive-tab active" data-tab="persons">論證者</button>
         <button class="archive-tab" data-tab="philosophy">思想源流</button>
@@ -202,15 +259,14 @@
     </div>
   </section>
 
-  <!-- JS: Data -->
+  <!-- JS -->
   <script src="js/data/characters.js"></script>
   <script src="js/data/locations.js"></script>
   <script src="js/data/script-prologue.js"></script>
   <script src="js/data/script-chapter1.js"></script>
-  <!-- JS: Core -->
+  <script src="js/data/script-dlc-miyuki.js"></script>
   <script src="js/core/audio.js"></script>
   <script src="js/core/state.js"></script>
-  <!-- JS: UI -->
   <script src="js/ui/transitions.js"></script>
   <script src="js/ui/opening.js"></script>
   <script src="js/ui/title.js"></script>
@@ -222,7 +278,7 @@
   <script src="js/ui/pause-menu.js"></script>
   <script src="js/ui/archive.js"></script>
   <script src="js/ui/mobile.js"></script>
-  <!-- JS: Engine (last) -->
+  <script src="js/ui/dlc-miyuki.js"></script>
   <script src="js/core/engine.js"></script>
 </body>
 </html>
