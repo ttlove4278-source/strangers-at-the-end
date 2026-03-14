@@ -1,0 +1,134 @@
+#screen-archive {
+  background: var(--black);
+}
+.archive-panel {
+  width: min(700px, 92vw);
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.archive-header {
+  text-align: center;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.archive-title {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  color: var(--white);
+  letter-spacing: 0.6em;
+}
+.archive-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--heat);
+  letter-spacing: 0.3em;
+  margin-top: 0.3rem;
+  opacity: 0.6;
+}
+.archive-tabs {
+  display: flex;
+  gap: 0.3rem;
+  justify-content: center;
+}
+.archive-tab {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  color: var(--grey);
+  letter-spacing: 0.3em;
+  padding: 0.5rem 1.2rem;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.archive-tab.active {
+  color: var(--white);
+  border-color: var(--heat);
+  background: rgba(255,107,53,0.06);
+}
+.archive-tab:hover {
+  color: var(--white);
+}
+.archive-content {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-right: 0.5rem;
+}
+.archive-content::-webkit-scrollbar {
+  width: 2px;
+}
+.archive-content::-webkit-scrollbar-track {
+  background: var(--grey-dark);
+}
+.archive-content::-webkit-scrollbar-thumb {
+  background: var(--heat);
+}
+.archive-empty {
+  text-align: center;
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  color: var(--grey-dark);
+  letter-spacing: 0.5em;
+  padding: 4rem 0;
+}
+.archive-entry {
+  background: rgba(255,255,255,0.015);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.archive-entry-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 1.2rem;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.ae-color-bar {
+  width: 3px;
+  height: 1.5rem;
+  border-radius: 1px;
+}
+.ae-title {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  letter-spacing: 0.3em;
+}
+.ae-code {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--grey);
+  margin-left: auto;
+}
+.ae-class {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--heat);
+  opacity: 0.6;
+}
+.ae-body {
+  padding: 1rem 1.2rem;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: var(--grey-light);
+  line-height: 2;
+  letter-spacing: 0.06em;
+}
+.ae-quote {
+  padding: 0.8rem 1.2rem;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  font-family: var(--font-serif);
+  font-size: 0.8rem;
+  color: var(--grey);
+  font-style: italic;
+  letter-spacing: 0.15em;
+}
+.archive-back {
+  justify-content: center;
+  margin-top: 0.5rem;
+}
