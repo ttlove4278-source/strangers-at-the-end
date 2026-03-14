@@ -1,0 +1,249 @@
+#screen-explore {
+  background: var(--asphalt);
+  position: relative;
+}
+
+.explore-bg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: var(--z-bg);
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.4) saturate(0.6);
+  transition: all 1s var(--ease-in-out);
+}
+
+.explore-bg::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(10,10,10,0.3),
+    rgba(10,10,10,0.8)
+  );
+}
+
+.explore-ui {
+  position: relative;
+  z-index: var(--z-ui);
+  width: 100%; height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 3vh 4vw;
+}
+
+/* 顶部信息 */
+.explore-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2vh;
+}
+
+.explore-date {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--heat);
+  letter-spacing: 0.3em;
+}
+
+.explore-channel {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+}
+
+.ch-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--grey);
+}
+
+.ch-number {
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  color: var(--crt-green);
+  text-shadow: 0 0 10px var(--crt-green-dim);
+  font-weight: 700;
+}
+
+.explore-location {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  color: var(--white);
+  letter-spacing: 0.6em;
+}
+
+/* 状态条 */
+.explore-status {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 320px;
+  margin-bottom: auto;
+}
+
+.status-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.status-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--grey);
+  min-width: 2.5rem;
+  text-align: right;
+  letter-spacing: 0.1em;
+}
+
+.status-gauge {
+  flex: 1;
+  height: 4px;
+  background: var(--grey-dark);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.status-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.8s var(--ease-out);
+  position: relative;
+}
+
+.logos-fill {
+  background: linear-gradient(90deg, var(--pocari), var(--crt-green));
+}
+
+.logos-fill::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 0;
+  width: 20px; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4));
+  animation: gaugeShine 2s ease-in-out infinite;
+}
+
+@keyframes gaugeShine {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+.crystal-fill {
+  background: linear-gradient(90deg, var(--grey), var(--white));
+}
+
+.crystal-gauge {
+  background: rgba(255,255,255,0.1);
+}
+
+.status-value {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--grey-light);
+  min-width: 3.5rem;
+}
+
+/* 行动选项 */
+.explore-actions {
+  position: absolute;
+  right: 5vw;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 1.8rem;
+  background: rgba(10,10,10,0.7);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-right: 3px solid transparent;
+  border-radius: 4px 0 0 4px;
+  cursor: pointer;
+  transition: all 0.25s var(--ease-out);
+  min-width: 200px;
+  justify-content: flex-end;
+}
+
+.action-btn:hover {
+  border-right-color: var(--heat);
+  background: rgba(255,107,53,0.06);
+  transform: translateX(-5px);
+}
+
+.action-text {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  color: var(--grey-light);
+  letter-spacing: 0.3em;
+  transition: color 0.2s;
+}
+
+.action-btn:hover .action-text {
+  color: var(--white);
+}
+
+.action-icon {
+  font-size: 0.8rem;
+  color: var(--grey-dark);
+  transition: color 0.2s;
+}
+
+.action-btn:hover .action-icon {
+  color: var(--heat);
+}
+
+/* 频道导航 */
+.explore-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 1.5vh 0;
+}
+
+.nav-btn {
+  font-family: var(--font-sans);
+  font-size: 1.2rem;
+  color: var(--grey);
+  padding: 0.4rem 0.8rem;
+  transition: color 0.2s;
+}
+
+.nav-btn:hover {
+  color: var(--heat);
+}
+
+.nav-channels {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.nav-ch {
+  width: 8px; height: 8px;
+  border: 1px solid var(--grey-dark);
+  border-radius: 1px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.nav-ch.active {
+  background: var(--heat);
+  border-color: var(--heat);
+  box-shadow: 0 0 8px var(--heat-glow);
+}
+
+.nav-ch:hover {
+  border-color: var(--grey-light);
+}
