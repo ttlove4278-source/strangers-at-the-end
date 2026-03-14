@@ -1,0 +1,98 @@
+/* ===== 战斗界面(Phase 3预置样式) ===== */
+#screen-battle {
+  background: var(--black);
+  position: relative;
+}
+
+.battle-stage {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 60%;
+  z-index: var(--z-bg);
+}
+
+.battle-ui {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 45%;
+  z-index: var(--z-ui);
+  display: flex;
+  padding: 2vh 3vw;
+  gap: 2rem;
+}
+
+/* 战斗菜单 — P5弧形风格 */
+.battle-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  align-self: center;
+}
+
+.bmenu-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  padding: 0.7rem 2rem;
+  cursor: pointer;
+  transition: all 0.2s var(--ease-out);
+  border-left: 2px solid transparent;
+  position: relative;
+  transform-origin: left center;
+}
+
+.bmenu-item:hover {
+  border-left-color: var(--heat);
+  transform: translateX(8px) skewX(-2deg);
+}
+
+.bmenu-item:active {
+  transform: translateX(8px) skewX(-2deg) scale(0.97);
+}
+
+.bmenu-key {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: var(--white);
+  letter-spacing: 0.3em;
+  transition: color 0.2s;
+}
+
+.bmenu-item:hover .bmenu-key {
+  color: var(--heat);
+  text-shadow: 0 0 15px var(--heat-glow);
+}
+
+.bmenu-sub {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--grey-dark);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* 战斗日志 */
+.battle-log {
+  flex: 1;
+  padding: 1rem;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--grey);
+  line-height: 2;
+  overflow-y: auto;
+  border-left: 1px solid var(--grey-dark);
+  margin-left: auto;
+  max-width: 40%;
+}
+
+/* 敌方信息 */
+.battle-enemy-info {
+  position: absolute;
+  top: 3vh; right: 4vw;
+}
+
+/* 玩家信息 */
+.battle-player-info {
+  position: absolute;
+  bottom: 48%; left: 4vw;
+}
