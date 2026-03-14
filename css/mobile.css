@@ -1,0 +1,88 @@
+.mobile-controls {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0;
+  width: 100%;
+  z-index: 80;
+  padding: 1rem 1.5rem 2rem;
+  justify-content: space-between;
+  align-items: flex-end;
+  pointer-events: none;
+}
+.mobile-btn {
+  pointer-events: all;
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: var(--grey-light);
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.mobile-btn:active,
+.mobile-btn.pressed {
+  background: rgba(255,107,53,0.2);
+  border-color: var(--heat);
+  color: var(--heat);
+  transform: scale(0.9);
+}
+.mobile-btn-up { position: absolute; bottom: 110px; left: 38px; }
+.mobile-btn-down { position: absolute; bottom: 20px; left: 38px; }
+.mobile-btn-confirm { position: absolute; bottom: 50px; right: 30px; width: 56px; height: 56px; font-size: 1.3rem; }
+.mobile-btn-cancel { position: absolute; bottom: 50px; right: 100px; }
+.mobile-btn-menu { position: absolute; top: auto; bottom: 120px; right: 30px; width: 40px; height: 40px; font-size: 0.9rem; }
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+  .title-char { font-size: clamp(2.2rem, 10vw, 3.5rem) !important; }
+  .title-sub-top { font-size: 0.75rem; letter-spacing: 0.6em; }
+  .title-sub-bottom { font-size: 0.8rem; letter-spacing: 0.5em; }
+  .title-en { font-size: 0.55rem; }
+  .menu-item { padding: 0.6rem 1.8rem; font-size: 0.9rem; letter-spacing: 0.3em; }
+
+  .poem-lines { gap: 2rem; height: 50vh; font-size: 1.05rem; }
+
+  .narration-text { max-width: 85vw; font-size: 0.95rem; padding: 2rem; line-height: 2.4; }
+  .dlg-box { padding: 0 3vw 12vh; }
+  .dlg-text-area { padding: 1.2rem 1.5rem; }
+  .dlg-text { font-size: 0.9rem; line-height: 2; }
+  .dlg-choices { right: 3vw; bottom: 28vh; }
+  .choice-item { min-width: 220px; padding: 0.7rem 1.2rem; }
+
+  .explore-header { flex-wrap: wrap; gap: 1rem; }
+  .explore-location { font-size: 1.1rem; letter-spacing: 0.4em; }
+  .explore-actions { right: 3vw; }
+  .action-btn { min-width: 160px; padding: 0.6rem 1.2rem; }
+  .explore-scene-desc { max-width: 55vw; font-size: 0.8rem; bottom: 14vh; }
+
+  .battle-ui { padding: 1vh 2vw 10vh; }
+  .bmenu-key { font-size: 0.85rem; }
+  .battle-log { font-size: 0.7rem; max-width: 35%; }
+  .battle-enemy-info { top: 1.5vh; right: 2vw; }
+  .bei-name { font-size: 0.85rem; }
+
+  .op-title-main { font-size: clamp(2rem, 8vw, 3.5rem) !important; }
+  .op-sil-name { font-size: clamp(2rem, 6vw, 3rem) !important; }
+
+  .config-panel { gap: 1.5rem; }
+  .config-label { font-size: 0.85rem; min-width: 4em; }
+
+  .save-slot { padding: 0.8rem 1rem; }
+  .archive-panel { height: 80vh; }
+  .archive-tabs { flex-wrap: wrap; }
+  .archive-tab { font-size: 0.75rem; padding: 0.4rem 0.8rem; }
+}
+
+@media (max-width: 480px) {
+  .poem-lines { gap: 1.5rem; height: 45vh; font-size: 0.95rem; }
+  .narration-text { font-size: 0.88rem; max-width: 92vw; }
+  .dlg-box { padding: 0 2vw 14vh; }
+  .explore-scene-desc { max-width: 65vw; left: 3vw; }
+  .battle-entity.enemy { font-size: 5rem; }
+  .battle-entity.player { font-size: 4rem; }
+}
