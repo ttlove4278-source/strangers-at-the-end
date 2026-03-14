@@ -1,14 +1,7 @@
 #screen-dialogue {
   background: var(--black);
-  display: none;
   position: relative;
 }
-
-#screen-dialogue.active {
-  display: block;
-}
-
-/* 背景 */
 .dlg-background {
   position: absolute;
   top: 0; left: 0;
@@ -16,23 +9,14 @@
   z-index: var(--z-bg);
   background-size: cover;
   background-position: center;
-  transition: filter 0.8s var(--ease-in-out), opacity 0.8s var(--ease-in-out);
+  transition: all 0.8s var(--ease-in-out);
 }
-
 .dlg-bg-overlay {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: linear-gradient(
-    to bottom,
-    rgba(10, 10, 10, 0.2) 0%,
-    rgba(10, 10, 10, 0.1) 50%,
-    rgba(10, 10, 10, 0.7) 85%,
-    rgba(10, 10, 10, 0.95) 100%
-  );
+  background: linear-gradient(to bottom, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.1) 50%, rgba(10,10,10,0.7) 85%, rgba(10,10,10,0.95) 100%);
 }
-
-/* 场景信息 */
 .dlg-location {
   position: absolute;
   top: 0; left: 0;
@@ -42,12 +26,10 @@
   transform: translateX(-20px);
   transition: all 0.6s var(--ease-out);
 }
-
 .dlg-location.visible {
   opacity: 1;
   transform: translateX(0);
 }
-
 .dlg-location .loc-time {
   font-family: var(--font-mono);
   font-size: 0.7rem;
@@ -55,28 +37,22 @@
   letter-spacing: 0.3em;
   margin-bottom: 0.3rem;
 }
-
 .dlg-location .loc-place {
   font-family: var(--font-serif);
   font-size: 1.1rem;
   color: var(--white);
   letter-spacing: 0.6em;
-  position: relative;
   padding-left: 1.5rem;
+  position: relative;
 }
-
 .dlg-location .loc-place::before {
   content: '';
   position: absolute;
-  left: 0;
-  top: 50%;
+  left: 0; top: 50%;
   transform: translateY(-50%);
-  width: 1rem;
-  height: 2px;
+  width: 1rem; height: 2px;
   background: var(--heat);
 }
-
-/* 角色立绘区 */
 .dlg-characters {
   position: absolute;
   bottom: 0; left: 0;
@@ -87,41 +63,26 @@
   justify-content: space-between;
   align-items: flex-end;
 }
-
 .dlg-chara {
-  width: 40%;
-  height: 100%;
+  width: 40%; height: 100%;
   display: flex;
   align-items: flex-end;
   justify-content: center;
   transition: all 0.5s var(--ease-out);
-  filter: brightness(0.5);
+  filter: brightness(0.4);
 }
-
 .dlg-chara.speaking {
   filter: brightness(1);
-  transform: translateY(0);
 }
-
 .dlg-chara.left { padding-left: 5%; }
 .dlg-chara.right { padding-right: 5%; }
-
-/* 文字立绘（纯CSS角色） */
 .chara-silhouette {
   font-family: var(--font-display);
   font-size: 12rem;
   font-weight: 900;
-  opacity: 0.08;
-  color: var(--white);
+  opacity: 0.07;
   line-height: 1;
-  user-select: none;
 }
-
-.chara-silhouette.camus { color: var(--camus); }
-.chara-silhouette.plato { color: var(--plato); }
-.chara-silhouette.nietzsche { color: var(--nietzsche); }
-
-/* 旁白层 */
 .dlg-narration {
   position: absolute;
   top: 0; left: 0;
@@ -134,44 +95,44 @@
   opacity: 0;
   transition: opacity 0.6s;
 }
-
 .dlg-narration.active {
   opacity: 1;
   pointer-events: all;
 }
-
 .narration-text {
   font-family: var(--font-serif);
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   color: var(--grey-light);
-  line-height: 2.8;
-  letter-spacing: 0.15em;
+  line-height: 2.6;
+  letter-spacing: 0.12em;
   text-align: center;
-  max-width: 65vw;
-  padding: 4rem;
+  max-width: 60vw;
+  padding: 3rem;
   position: relative;
 }
-
 .narration-text::before,
 .narration-text::after {
   content: '';
   position: absolute;
-  width: 30px;
-  height: 1px;
+  width: 30px; height: 1px;
   background: var(--grey-dark);
 }
+.narration-text::before { top: 1.5rem; left: 50%; transform: translateX(-50%); }
+.narration-text::after { bottom: 1.5rem; left: 50%; transform: translateX(-50%); }
 
-.narration-text::before {
-  top: 2rem; left: 50%;
-  transform: translateX(-50%);
+.narration-text.style-radio {
+  color: var(--crt-green);
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  text-shadow: 0 0 8px var(--crt-green-dim);
+}
+.narration-text.style-chapter-end {
+  color: var(--grey);
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  letter-spacing: 0.4em;
 }
 
-.narration-text::after {
-  bottom: 2rem; left: 50%;
-  transform: translateX(-50%);
-}
-
-/* 对话框 */
 .dlg-box {
   position: absolute;
   bottom: 0; left: 0;
@@ -182,13 +143,10 @@
   transform: translateY(20px);
   transition: all 0.4s var(--ease-out);
 }
-
 .dlg-box.active {
   opacity: 1;
   transform: translateY(0);
 }
-
-/* 名牌 */
 .dlg-name-plate {
   display: inline-block;
   margin-bottom: 0.8rem;
@@ -198,27 +156,19 @@
   transform: translateX(-10px);
   transition: all 0.3s var(--ease-out);
 }
-
 .dlg-name-plate.visible {
   opacity: 1;
   transform: translateX(0);
 }
-
 .dlg-name-text {
   font-family: var(--font-serif);
   font-size: 0.95rem;
   color: var(--heat);
   letter-spacing: 0.5em;
 }
-
-/* 台词区 */
 .dlg-text-area {
-  background: linear-gradient(
-    135deg,
-    rgba(10, 10, 10, 0.92),
-    rgba(20, 20, 20, 0.88)
-  );
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: linear-gradient(135deg, rgba(10,10,10,0.92), rgba(20,20,20,0.88));
+  border: 1px solid rgba(255,255,255,0.06);
   border-left: 3px solid var(--heat);
   border-radius: 0 4px 4px 0;
   padding: 1.8rem 2.5rem;
@@ -226,7 +176,6 @@
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
-
 .dlg-text {
   font-family: var(--font-sans);
   font-size: 1rem;
@@ -235,44 +184,27 @@
   letter-spacing: 0.08em;
   min-height: 3.5em;
 }
-
-/* 打字效果的光标 */
 .dlg-text .typing-cursor {
   display: inline-block;
-  width: 2px;
-  height: 1.1em;
+  width: 2px; height: 1.1em;
   background: var(--heat);
   margin-left: 2px;
   vertical-align: text-bottom;
   animation: cursorBlink 0.7s step-end infinite;
 }
-
-/* 继续指示器 */
 .dlg-indicator {
   position: absolute;
-  bottom: 0.8rem;
-  right: 1.5rem;
+  bottom: 0.8rem; right: 1.5rem;
   font-size: 0.7rem;
   color: var(--heat);
   opacity: 0;
   transition: opacity 0.3s;
   animation: indicatorBounce 1.2s ease-in-out infinite;
 }
-
-.dlg-indicator.visible {
-  opacity: 0.6;
-}
-
-@keyframes indicatorBounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(4px); }
-}
-
-/* 选项 */
+.dlg-indicator.visible { opacity: 0.6; }
 .dlg-choices {
   position: absolute;
-  bottom: 22vh;
-  right: 5vw;
+  bottom: 22vh; right: 5vw;
   z-index: var(--z-dialogue);
   display: flex;
   flex-direction: column;
@@ -282,20 +214,18 @@
   transition: all 0.5s var(--ease-out);
   pointer-events: none;
 }
-
 .dlg-choices.active {
   opacity: 1;
   transform: translateX(0);
   pointer-events: all;
 }
-
 .choice-item {
   display: flex;
   align-items: center;
   gap: 1rem;
   padding: 0.9rem 2rem;
-  background: rgba(10, 10, 10, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(10,10,10,0.85);
+  border: 1px solid rgba(255,255,255,0.08);
   border-left: 3px solid transparent;
   border-radius: 0 4px 4px 0;
   cursor: pointer;
@@ -303,17 +233,13 @@
   backdrop-filter: blur(4px);
   min-width: 280px;
 }
-
-.choice-item:hover {
+.choice-item:hover,
+.choice-item.highlighted {
   border-left-color: var(--heat);
-  background: rgba(255, 107, 53, 0.08);
+  background: rgba(255,107,53,0.08);
   transform: translateX(-5px);
 }
-
-.choice-item:active {
-  transform: translateX(-5px) scale(0.98);
-}
-
+.choice-item:active { transform: translateX(-5px) scale(0.98); }
 .choice-marker {
   font-family: var(--font-serif);
   font-size: 0.8rem;
@@ -322,12 +248,11 @@
   transform: translateX(-5px);
   transition: all 0.2s;
 }
-
-.choice-item:hover .choice-marker {
+.choice-item:hover .choice-marker,
+.choice-item.highlighted .choice-marker {
   opacity: 1;
   transform: translateX(0);
 }
-
 .choice-text {
   font-family: var(--font-serif);
   font-size: 0.95rem;
@@ -335,11 +260,8 @@
   letter-spacing: 0.15em;
   transition: color 0.2s;
 }
-
-.choice-item:hover .choice-text {
-  color: var(--white);
-}
-
+.choice-item:hover .choice-text,
+.choice-item.highlighted .choice-text { color: var(--white); }
 .choice-effect {
   font-family: var(--font-mono);
   font-size: 0.65rem;
@@ -347,7 +269,4 @@
   margin-left: auto;
   letter-spacing: 0.1em;
 }
-
-.choice-item:hover .choice-effect {
-  color: var(--heat);
-}
+.choice-item:hover .choice-effect { color: var(--heat); }
