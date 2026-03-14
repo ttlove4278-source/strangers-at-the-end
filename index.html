@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>世紀末異鄉人</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;700&family=Zen+Kurenaido&family=Shippori+Mincho:wght@400;700;800&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/effects.css">
+  <link rel="stylesheet" href="css/opening.css">
+  <link rel="stylesheet" href="css/title.css">
+  <link rel="stylesheet" href="css/poem.css">
+  <link rel="stylesheet" href="css/dialogue.css">
+  <link rel="stylesheet" href="css/explore.css">
+  <link rel="stylesheet" href="css/battle.css">
+</head>
+<body>
+  <!-- ============ 全局特效层 ============ -->
+  <div id="scanlines" class="scanlines"></div>
+  <div id="vignette" class="vignette"></div>
+  <div id="noise" class="noise"></div>
+  <div id="transition-overlay" class="transition-overlay"></div>
+
+  <!-- ============ BOOT 序列 ============ -->
+  <section id="screen-boot" class="screen active">
+    <div class="boot-content">
+      <div class="boot-line" data-delay="0">BIOS v1.999</div>
+      <div class="boot-line" data-delay="400">MEM CHECK... 1999KB OK</div>
+      <div class="boot-line" data-delay="900">LOGOS DENSITY: 0.3 HERACLITUS</div>
+      <div class="boot-line" data-delay="1500">PHILOSOPHY_SYS... <span class="warn">WARNING: CRITICAL MASS</span></div>
+      <div class="boot-line" data-delay="2200">DATE: 1999.07.13</div>
+      <div class="boot-line" data-delay="2800">LOADING WORLD...</div>
+      <div class="boot-cursor" data-delay="3200">█</div>
+    </div>
+  </section>
+
+  <!-- ============ OP 动画 ============ -->
+  <section id="screen-opening" class="screen">
+    <div class="op-container">
+      <!-- OP各阶段由JS动态生成 -->
+    </div>
+    <div class="op-skip">
+      <span class="op-skip-key">SPACE</span>
+      <span class="op-skip-text">跳过</span>
+    </div>
+  </section>
+
+  <!-- ============ 标题画面 ============ -->
+  <section id="screen-title" class="screen">
+    <div class="title-bg">
+      <div class="heat-haze"></div>
+      <div class="title-silhouette"></div>
+    </div>
+    <div class="title-content">
+      <div class="title-sub-top">1999·夏</div>
+      <h1 class="title-main">
+        <span class="title-char" data-index="0">世</span>
+        <span class="title-char" data-index="1">紀</span>
+        <span class="title-char" data-index="2">末</span>
+        <span class="title-break"></span>
+        <span class="title-char" data-index="3">異</span>
+        <span class="title-char" data-index="4">鄉</span>
+        <span class="title-char" data-index="5">人</span>
+      </h1>
+      <div class="title-sub-bottom">推石頭的人們</div>
+      <div class="title-en">STRANGERS AT THE END OF THE CENTURY</div>
+    </div>
+    <nav class="title-menu">
+      <div class="menu-item active" data-action="start">
+        <span class="menu-marker">▸</span>
+        <span class="menu-text">開始推石頭</span>
+      </div>
+      <div class="menu-item" data-action="continue">
+        <span class="menu-marker">▸</span>
+        <span class="menu-text">繼續</span>
+      </div>
+      <div class="menu-item" data-action="config">
+        <span class="menu-marker">▸</span>
+        <span class="menu-text">設定</span>
+      </div>
+    </nav>
+    <div class="title-footer">
+      <span>© 1999 第九課非公式記録</span>
+      <span class="title-temp">37.5℃</span>
+    </div>
+  </section>
+
+  <!-- ============ 卷首诗 ============ -->
+  <section id="screen-poem" class="screen">
+    <div class="poem-container">
+      <div class="poem-lines">
+        <!-- JS动态生成竖排诗句 -->
+      </div>
+      <div class="poem-author"></div>
+    </div>
+  </section>
+
+  <!-- ============ 对话/剧情 ============ -->
+  <section id="screen-dialogue" class="screen">
+    <div class="dlg-background" id="dlg-bg">
+      <div class="dlg-bg-overlay"></div>
+    </div>
+
+    <!-- 角色立绘区 -->
+    <div class="dlg-characters">
+      <div class="dlg-chara left" id="dlg-chara-left"></div>
+      <div class="dlg-chara right" id="dlg-chara-right"></div>
+    </div>
+
+    <!-- 旁白层 -->
+    <div class="dlg-narration" id="dlg-narration">
+      <div class="narration-text" id="narration-text"></div>
+    </div>
+
+    <!-- 对话框 -->
+    <div class="dlg-box" id="dlg-box">
+      <div class="dlg-name-plate" id="dlg-name">
+        <span class="dlg-name-text"></span>
+      </div>
+      <div class="dlg-text-area">
+        <div class="dlg-text" id="dlg-text"></div>
+        <div class="dlg-indicator" id="dlg-indicator">▼</div>
+      </div>
+    </div>
+
+    <!-- 选项 -->
+    <div class="dlg-choices" id="dlg-choices">
+      <!-- JS动态生成 -->
+    </div>
+
+    <!-- 场景信息 -->
+    <div class="dlg-location" id="dlg-location">
+      <div class="loc-time"></div>
+      <div class="loc-place"></div>
+    </div>
+  </section>
+
+  <!-- ============ 探索界面 ============ -->
+  <section id="screen-explore" class="screen">
+    <div class="explore-bg" id="explore-bg"></div>
+    <div class="explore-ui">
+      <div class="explore-header">
+        <div class="explore-date" id="explore-date">1999.07.13</div>
+        <div class="explore-channel">
+          <span class="ch-label">CH.</span>
+          <span class="ch-number" id="ch-number">01</span>
+        </div>
+        <div class="explore-location" id="explore-location">堤防</div>
+      </div>
+
+      <div class="explore-status">
+        <div class="status-bar">
+          <span class="status-label">LG</span>
+          <div class="status-gauge">
+            <div class="status-fill logos-fill" id="logos-bar" style="width:62%"></div>
+          </div>
+          <span class="status-value" id="logos-value">6.2赫</span>
+        </div>
+        <div class="status-bar">
+          <span class="status-label">結晶</span>
+          <div class="status-gauge crystal-gauge">
+            <div class="status-fill crystal-fill" id="crystal-bar" style="width:12%"></div>
+          </div>
+          <span class="status-value" id="crystal-value">12%</span>
+        </div>
+      </div>
+
+      <div class="explore-actions" id="explore-actions">
+        <!-- JS生成 -->
+      </div>
+
+      <div class="explore-nav">
+        <button class="nav-btn" id="nav-prev">◁</button>
+        <div class="nav-channels" id="nav-channels"></div>
+        <button class="nav-btn" id="nav-next">▷</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 战斗界面(预置) ============ -->
+  <section id="screen-battle" class="screen">
+    <div class="battle-stage" id="battle-stage"></div>
+    <div class="battle-ui">
+      <div class="battle-enemy-info" id="battle-enemy-info"></div>
+      <div class="battle-player-info" id="battle-player-info"></div>
+      <div class="battle-menu" id="battle-menu">
+        <div class="bmenu-item" data-action="quote">
+          <span class="bmenu-key">引用</span>
+          <span class="bmenu-sub">Quote</span>
+        </div>
+        <div class="bmenu-item" data-action="proposition">
+          <span class="bmenu-key">命題展開</span>
+          <span class="bmenu-sub">Proposition</span>
+        </div>
+        <div class="bmenu-item" data-action="dialectic">
+          <span class="bmenu-key">辯證</span>
+          <span class="bmenu-sub">Dialectic</span>
+        </div>
+        <div class="bmenu-item" data-action="item">
+          <span class="bmenu-key">道具</span>
+          <span class="bmenu-sub">Items</span>
+        </div>
+        <div class="bmenu-item" data-action="silence">
+          <span class="bmenu-key">沈默</span>
+          <span class="bmenu-sub">Silence</span>
+        </div>
+      </div>
+      <div class="battle-log" id="battle-log"></div>
+    </div>
+  </section>
+
+  <!-- ============ JS ============ -->
+  <script src="js/data/characters.js"></script>
+  <script src="js/data/script-prologue.js"></script>
+  <script src="js/core/audio.js"></script>
+  <script src="js/core/state.js"></script>
+  <script src="js/ui/transitions.js"></script>
+  <script src="js/ui/opening.js"></script>
+  <script src="js/ui/title.js"></script>
+  <script src="js/ui/poem.js"></script>
+  <script src="js/ui/dialogue.js"></script>
+  <script src="js/core/engine.js"></script>
+</body>
+</html>
